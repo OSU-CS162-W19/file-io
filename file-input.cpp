@@ -79,5 +79,20 @@ int main(int argc, char const *argv[]) {
   delete[] students;
   infile.close();
 
+  std::cout << std::endl << "== Reading students file a second time" << std::endl;
+  infile.open("./people-to-read.txt");
+  if (infile.fail()) {
+    std::cerr << "Failed to open people-to-read.txt" << std::endl;
+    return 1;
+  }
+
+  struct student s;
+  while (!infile.eof()) {
+    infile >> s.first_name >> s.last_name >> s.gpa;
+    if (!infile.fail()) {
+      std::cout << s.first_name << "\t" << s.gpa << std::endl;
+    }
+  }
+
   return 0;
 }
